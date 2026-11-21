@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-21",
+  "runs": [
+    {
+      "input_bundle_sha256": "9afb6f0078f688869d2cf1f83fd5d8166ff6788ce09f41397776f26bd4e4716e",
+      "stdout": [
+        "Python 3.12.10",
+        ".............................                                            [100%]",
+        "29 passed in 2.71s"
+      ],
+      "exit_code": 0
+    },
+    {
+      "input_bundle_sha256": "9874f1c077e003a7448c32fc403e1600a6168538361819d2854794ce3500ae42",
+      "stdout": [
+        "Python 3.12.10",
+        "...............................                                          [100%]",
+        "31 passed in 0.84s",
+        "Verified primary and full-panel replay for all 18 settings, solver choices and output hashes."
+      ],
+      "exit_code": 0
+    }
+  ],
+  "independent_checker_sha256": "714b4025639ad13c2a6c8d88db728ebc7e9d8dcefeb96c807cc2640440c3e25a",
+  "replicated_primary_outputs": [
+    "audits.csv",
+    "datasets.csv",
+    "replays.csv",
+    "pooled.json"
+  ]
+}

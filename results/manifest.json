@@ -1,0 +1,34 @@
+{
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "sources": {
+    "design.py": "bfaae4d9bbfe664eef72e9eb9cd5cbaf400610f16cc62288003b27a5aaf3eeab",
+    "fetch.py": "4531ff809c1c0359a6f7154c61471d5c06e42159cdb81600cc2dcc01b6c1114b",
+    "replay.py": "0b4f9ba4214b85f6e8e875787ed25c91643abe496e1401a234ad523c35e9ca2b",
+    "test_design.py": "a81677929010816b6398a4dc9e0a67429fbb426937f1217ec9c245101f59a6c2",
+    "test_replay.py": "db17813a43c7c0543196cd3876bca7663ec673ca66bb2425f8947f5957234af0",
+    "test_weighted.py": "4b88e452d330ed3493941a386d77d52f68b0a64aa9e3de3696902ce8f35aea79",
+    "weighted.py": "d006439165157384a94c241cc37994dd48b527e5092c7fe6965fa41fc102feab"
+  },
+  "inputs": {
+    "ASP-POTASSCO/description.txt": "f822f72f3ec2a623d84f5ae032f29dc09ce65db94355ac361b443e401faa7596",
+    "ASP-POTASSCO/algorithm_runs.arff": "7fa48b0c896e52e018ac207222b218e6f4844f528ddc18459b0c7f47f601975e",
+    "BNSL-2016/description.txt": "97db5247356a4c6ae5b207e9d53d4cd65dcaadfb7c2d3d61a64cea5372b74f82",
+    "BNSL-2016/algorithm_runs.arff": "a19068fbff3bff52d794c3c2374a45cd171aaee7a3fc2d83edda449b5d874c3a",
+    "CSP-2010/description.txt": "16c3ecf475085418fb1a2f21168e8cfacc843ad05b48c7736eac2735f93c36ad",
+    "CSP-2010/algorithm_runs.arff": "7652ca48c087a252ae8ce2cb2b1fa67b42fc0557e752f9a4902b3da84ad043a2",
+    "MIP-2016/description.txt": "b5f2ab6626d0ed9194d355475a4bddab3d38070b5e223a12f26a4941a868ebaf",
+    "MIP-2016/algorithm_runs.arff": "bcee770829aa3267523eb17f6a53f3182ccf624561d093399b968aae21f19b8b",
+    "QBF-2016/description.txt": "ff9aae95c61d5edfb61664014abbfb654e7745d70e9279f38a203f398eb8b2fb",
+    "QBF-2016/algorithm_runs.arff": "82a9acc4d5dab1940c842f8858206c71cbffa385ac15fa0c3142ad1b474abdda",
+    "SAT11-INDU/description.txt": "42e6cb2f15138664699574d0fc6b092ea349937aba449b7611a8d50c3dbd6419",
+    "SAT11-INDU/algorithm_runs.arff": "a5314349ce73459193d9bc87abb56a14a5b2287b8c90f4333f1c163c8b4af377"
+  },
+  "output_sha256": {
+    "audits.csv": "35d08a9278816a0d9f488c70d86e392d7006b88d013fa2ac920615c3a0f708cf",
+    "capped.csv": "9af9b801c0bd3ae7b1e5be983113f8f40c4b74a9071ed6f2bd1d385b4325f297",
+    "datasets.csv": "755aede5dfcacd18aeef4128ba8921c2ac4a2a5bbc5fa3e1e334e9934b508f07",
+    "pooled.json": "75521aaad8766117fecd74745d9ee812e58e6fcb1bfdaacac4252fa92acc1619",
+    "replays.csv": "305e41be26b3493f3605ffc9f4fc761c0cc4ebf6a3c86a7203669f3554560cdb"
+  }
+}

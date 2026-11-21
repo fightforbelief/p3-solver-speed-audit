@@ -1,0 +1,5 @@
+*Abstract.* A benchmark can report the number of calls to a backup solver and the cost of solving each instance independently, yet leave their pairing unknown. We study how to recover this pairing with a limited number of flag checks. For equal-price checks, an optimal audit leaves a consecutive block of sorted costs unchecked. A matching adversary gives the same worst-case value for sequential and batch audits, including when several panels share a budget. Varying the price of a check makes the problem weakly NP-hard. We evaluate the design by hiding and restoring routing flags in six public solver portfolios.
+
+In 3,968 reference-solved instances the uniform-pairing approximation favored the schedule in all six scenarios. Matched runtimes favored it in one, with one further scenario within 0.05% of parity. At a budget of 394 checks shared across scenarios, optimizing their allocation reduced worst-case width from 0.216 to 0.121 in units of pooled reference time.
+
+*Keywords* #h(4pt) algorithm portfolios · partial identification · optimal recovery · runtime benchmarking

@@ -1,0 +1,30 @@
+{
+  "scenarios": [
+    "ASP-POTASSCO",
+    "BNSL-2016",
+    "CSP-2010",
+    "MIP-2016",
+    "QBF-2016",
+    "SAT11-INDU"
+  ],
+  "budget": 394,
+  "proportional": [
+    91,
+    82,
+    138,
+    16,
+    51,
+    16
+  ],
+  "optimal": [
+    38,
+    168,
+    88,
+    31,
+    13,
+    56
+  ],
+  "proportional_width": 0.21595885393520056,
+  "optimal_width": 0.12135624596698395,
+  "no_query_width": 0.9712974247223594
+}
