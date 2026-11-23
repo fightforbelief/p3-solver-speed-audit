@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-23",
+  "platform": "Windows",
+  "python": "3.12.10",
+  "study_tests_passed": 5,
+  "exit_code": 0,
+  "script_sha256": "3cb2b4af7a5f9a6d6f129dae9ebe04f1010d95760e098ad0a54968432699f6a5",
+  "result_sha256": "759b9deda4060564a474930ca021a5968a4f60b74679f559df9e3f71bae03db9",
+  "input_manifest_sha256": "4e6b509f4c31141fe57a2a85217eeeec390fc258d05b20d0b6b5e017ae56ebdd",
+  "source_snapshot": "4278bfcd6be1ac83e6ab6dde076c5de25d9550ee"
+}

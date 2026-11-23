@@ -13,3 +13,7 @@ Hide the linkage between first-stage failure flags and per-instance reference ru
 ## Additional check after the first replay
 
 The primary panel omits instances on which the backup fails. For a separate all-paired-instance sensitivity, record solved counts and charge an unsuccessful backup its entire published cutoff. This measures allocated slot cost even if a failed process stops earlier. Report results independently of the successful-reference panel. The software additionally verifies the unequal-price dynamic program against enumeration and checks replay arithmetic on a fixture containing success, timeout, and success exactly at the slice boundary.
+
+## Shared-budget baselines
+
+Additional analysis specified before calculating its outputs (23 November 2026). Use the original three slice lengths and the budget obtained by flooring 10% of each primary group. Compare proportional counts with (i) shares proportional to summed reference runtimes, integerized by largest remainder, and (ii) a greedy rule taking the greatest reduction in the exact group width for the next check. Break ties in the released scenario order. Report the exact optimum and all comparisons irrespective of their ordering. These are descriptive sensitivity analyses on the original test panels.

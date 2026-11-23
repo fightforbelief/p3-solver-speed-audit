@@ -1,0 +1,131 @@
+\documentclass[final,5p,times,twocolumn]{elsarticle}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage[hidelinks]{hyperref}
+\journal{Operations Research Letters}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\proofstart}{\noindent\textit{Proof.}\ }
+\newcommand{\proofend}{\hfill$\square$\par}
+\begin{document}
+\begin{frontmatter}
+\title{Minimax queries for a weighted sum with a known number of positive flags}
+\author{Yunjie Guo}
+\author{Hanqing Yang\corref{cor}}
+\cortext[cor]{Corresponding author. Email: hanqing.yang189@gmail.com}
+\address{Independent Researcher, Suzhou, China}
+\begin{abstract}
+An auditor knows the costs of all records and the number of positive flags. Which flags should be queried to bound their total cost? With equal query prices, an optimal batch leaves a consecutive block of sorted costs unchecked. Adaptive queries have the same worst-case width, including across groups with separate counts. Unequal prices yield weak NP-hardness. In six solver benchmarks, greedy group allocation attained the optimum at three time slices, despite an unbounded worst-case approximation ratio.
+\end{abstract}
+\begin{keyword}
+query selection \sep robust optimization \sep optimal recovery \sep solver portfolios
+\end{keyword}
+\end{frontmatter}
+
+\section{A decision about missing labels}
+A solver portfolio first tries a presolver, then routes its failures to a backup. Suppose a timing log gives the backup cost on each benchmark instance. A separate record gives the aggregate presolver time and the number of failures. If the linkage is lost, the time spent on the backup depends on whether the failures occurred on expensive instances. A partial audit can recover individual routing decisions, for example by inspecting retained traces. Which decisions guarantee the most precise assessment of the portfolio's total time?
+
+More generally, let $c_i\geq 0$ be known costs on $n$ records and let $z_i\in\{0,1\}$ be hidden flags with known total $\sum_i z_i=m$. A query reveals one specified flag. The target $T=\sum_i c_i z_i$ is a fixed finite-population total. We choose a deterministic audit that minimizes the maximum width between the largest and smallest totals still compatible with the answers. The maximum ranges over all placements of the $m$ flags. The midpoint of this interval also minimizes worst-case absolute estimation error, with error equal to half its width.
+
+Precision-constrained aggregation already relates the cost of refreshing independent intervals to knapsack \cite{olston}. With independent binary flags and no count, the worst-case width is the sum of all unchecked costs. A known count couples the flags: the positions of the unchecked costs relative to one another now matter. Classical rearrangement bounds give the extrema before queries \cite{cambanis}. Robust selection with information discovery uses cardinality-constrained uncertainty to choose a downstream solution \cite{chen}. In optimal decision trees a policy can seek to identify a hypothesis at minimum expected query cost \cite{zhuo}. Here the quantity is a weighted total and the loss is its worst residual diameter. We derive a sorted-block rule and a matching lower bound for sequential decisions. The same adversary settles how a budget can be shared among groups.
+
+\section{Optimal equal-price audits}
+For a multiset $S$, write $L_h(S)$ and $U_h(S)$ for the sums of its $h$ smallest and largest elements, and put $D_h(S)=U_h(S)-L_h(S)$. Empty sums are zero. After an audit of $Q$, let $K=\sum_{i\in Q}c_i z_i$, $h=m-\sum_{i\in Q}z_i$ and $S$ be the unchecked multiset. The endpoints are $K+L_h(S)$ and $K+U_h(S)$, obtained by assigning the $h$ remaining flags to the corresponding tails. Intermediate values may be unattainable.
+
+\begin{theorem}\label{th:block}
+Write $x_1\leq\cdots\leq x_n$ for the ordered costs. Given $0\leq q\leq n$, put $r=n-q$ and $k=\min\{m,n-m,\lfloor r/2\rfloor\}$. Define $S_s=(x_{s+1},\ldots,x_{s+r})$. The minimax width with at most $q$ queries is
+\begin{equation}\label{eq:window}
+ W(q)=\min_{0\leq s\leq q} D_k(S_s).
+\end{equation}
+Querying the complement of a minimizing block attains this width among all deterministic adaptive policies.
+\end{theorem}
+\proofstart Fix a query set of size $q$. Any residual count between $\max(0,m-q)$ and $\min(m,r)$ is attainable. Complementing flags gives $D_h=D_{r-h}$. For $h<r/2$, extending the two tails increases their difference weakly. The worst count therefore gives $D_k(S)$.
+
+Consider residual indices $i_1<\cdots<i_r$. If $k>0$, replace them with the consecutive block whose $k$th index is $i_k$. It fits because at least $k-1$ indices precede $i_k$ and at least $r-k$ follow. Its bottom $k$ indices move to the right or stay fixed. Its top $k$ indices move to the left or stay fixed, since $2k\leq r$. This replacement cannot increase $D_k$. For $k=0$ all widths vanish. Minimizing over the blocks proves the batch claim.
+
+Against a sequential policy, answer each query with the more numerous remaining flag, breaking ties arbitrarily. As long as one flag is in the minority, removing the other leaves the minority count unchanged until the counts balance. From balance, removals alternate between a tie and a one-unit difference. Hence at residual size $r$ the smaller count equals $\min\{m,n-m,\lfloor r/2\rfloor\}$. Every transcript on this path has a compatible labeling. Its terminal width is $D_k(S)$ whatever indices were queried, which is at least \eqref{eq:window}. Any policy stopping early can be padded to $q$ queries without increasing its width. \proofend
+
+Sorting and forming prefix sums costs $O(n\log n)$ time. Each candidate width takes two differences of prefix sums, so computing \eqref{eq:window} for a given budget takes another $O(q+1)$ operations. Stable sorting of tied costs preserves record identities. A certificate for a requested precision is the block location, the query budget and the computed worst-case width.
+
+\paragraph{When do the slowest records suffice?}
+For $s<q$ the change on shifting the unchecked window right one position is
+\begin{align*}
+D_k(S_{s+1})-D_k(S_s)
+ &= (x_{s+r+1}-x_{s+r-k+1})\\
+ &\quad -(x_{s+k+1}-x_{s+1}).
+\end{align*}
+The two terms span $k$ adjacent gaps in the ordered costs. Nondecreasing gaps suffice for the differences to be nonnegative, so $s=0$ is optimal. More generally $s=0$ minimizes the width exactly when all partial sums of these shifts from $s=0$ are nonnegative. A slowest-first rule can still have arbitrarily large relative loss. On $(1,2,M,M+1,M+2)$ with $M>3$, $m=q=2$, querying the two cheapest leaves width 2, while querying the two most expensive leaves width $M-1$.
+
+\section{Allocations and query prices}
+\begin{corollary}\label{co:groups}
+Let each group $g$ have its own known count $m_g$. For a total budget $q$, the minimax width of the sum across groups is $\min_{\sum_g b_g=q}\sum_g W_g(b_g)$, with $0\leq b_g\leq n_g$. Adaptive allocation across groups has the same worst-case value.
+\end{corollary}
+\proofstart Extrema in the groups can be attained simultaneously, so widths add. Apply the majority adversary within each group whenever that group receives a query. Its terminal width is at least $W_g(b_g)$ for the realized allocation. Choosing optimal group budgets and fixed blocks attains the sum. \proofend
+
+With tabulated widths, minimizing over the checks given to the last group for each partial budget gives an $O(Gq^2)$ dynamic program for $G$ groups. A greedy policy can assign each next check to the largest one-step decrease. Its approximation ratio for the remaining width is unbounded. For example, give each of $(0,0,M,M)$ and $(0,1)$ exactly one positive flag, set $M>1$ and allow two checks in total. The first group has widths $M,M,0$ at budgets $0,1,2$. Greedy spends its first check on the second group, leaving final width $M$. Spending both on the first group gives the optimal width 1. Adding a constant to all costs in a group leaves its widths unchanged.
+
+\begin{proposition}
+For positive integral query prices and a budget $C$, computing the minimum worst-case width is weakly NP-hard for integer data, even when $m=n/2$.
+\end{proposition}
+\proofstart Given $p$ knapsack items with positive integer values and weights, give each value to a record as its runtime and its weight as the query price. Add $p$ zero runtimes priced at $C+1$ and set $m=p$. After $j$ affordable queries, $r=2p-j$ records remain. At the worst residual count the top $\lfloor r/2\rfloor$ costs include all $p-j$ surviving positive costs, while the bottom such costs are all zero. The width equals the sum of the surviving values. Minimizing it solves knapsack. A proposed batch and its width can be checked in polynomial time. The majority adversary still realizes worst width on the path taken by any affordable sequential policy.
+
+For an exact pseudopolynomial algorithm fix $r$, hence $k$. Process the records in increasing cost order. Keep the minimum signed sum after each prefix indexed by retained count $j$ and spend $b\leq C$. Start with value zero at $(0,0)$. Querying the next record increases $b$ by its price. Retaining it adds its cost with coefficient $-1$ for rank $j+1\leq k$, $+1$ for $j+1>r-k$ and zero otherwise. Retain at most $r$ records and discard states exceeding the budget. The minimum over terminal states with count $r$ is the best $D_k$ for that size. Minimize over $r=0,\ldots,n$. The time is $O(n^3(C+1))$ and rolling tables use $O(n(C+1))$ space. \proofend
+
+\section{Audit of recorded solver schedules}
+For a cold backup with cost $c_i$ on instance $i$, let $B=\sum_i c_i>0$ and let $A$ be the known total presolver and checking time. The schedule-to-reference ratio is $R=(A+T)/B$, with parity at one. The audit widths above scale by $1/B$. Uniform random pairing gives expectation $A/B+m/n$. When costly reference runs are frequently routed to the backup, this calculation understates the schedule time. We compare aggregate times at matched solved status on the same instances.
+
+We replayed one schedule in each of six purposefully chosen ASlib scenarios \cite{aslib}. A SHA-256 split by instance identifier reserved about one fifth for training. On training instances, we ranked solvers by mean PAR10, charging ten times the scenario cutoff for unsuccessful or missing runs and breaking ties alphabetically. The best solver became the reference and the runner-up the presolver. On the remaining instances (repetition 1), the presolver received a time slot of 1\% of the scenario cutoff. Success incurred its recorded time. Failure incurred the full slot, followed by a cold reference run with its full original timeout. A successful run required an \texttt{ok} status and a time within the cutoff. These additive replay assumptions give both procedures a solved status on the primary, reference-solved panel. The paired records supply ground truth. We then hide the flags and let each query recover one original label.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Primary panels. $n$ is the number solved by the reference and $m$ the fallback count. Uniform and paired are ratios of total times. The last column is the worst width divided by $B$ after checking $\lfloor n/10\rfloor$ flags optimally.}
+\label{tab:panels}
+\begin{tabular}{lrrrrr}\toprule
+Scenario & $n$ & $m$ & Uniform & Paired & Width\\\midrule
+ASP-POTASSCO & 911 & 353 & .465 & .9584 & .298\\
+BNSL-2016 & 829 & 279 & .439 & 1.0657 & .225\\
+CSP-2010 & 1,382 & 393 & .433 & 1.0731 & .044\\
+MIP-2016 & 166 & 69 & .571 & 1.1008 & .253\\
+QBF-2016 & 518 & 125 & .437 & 1.1224 & .259\\
+SAT11-INDU & 162 & 96 & .658 & 1.0005 & .410\\\bottomrule
+\end{tabular}
+\end{table}
+
+Uniform pairing favored the schedule in all six panels (Table~\ref{tab:panels}). The paired schedule saved about 4.2\% in ASP, consumed 6.6--12.2\% more time in four panels and was within 0.05\% of parity in SAT. All initial intervals straddled parity. At a 10\% budget, querying the slowest instances attained the minimax width in every panel. Actual restored flags settled the direction only in CSP. At a 25\% budget they settled five of six comparisons. The SAT interval still included parity at 50\%. A narrow interval and a decision about the sign are distinct objectives.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Worst residual width divided by combined reference time. Each column uses 394 queries, the same evaluation instances and the failure counts at that presolver time slice.}
+\label{tab:allocation}
+\begin{tabular}{lrrr}\toprule
+Allocation & 1\% slice & 5\% slice & 10\% slice\\\midrule
+Instance share & .21596 & .19411 & .17307\\
+Reference-time share & .12389 & .11034 & .09868\\
+Marginal greedy & .12136 & .10758 & .09530\\
+Exact optimum & .12136 & .10758 & .09530\\\bottomrule
+\end{tabular}
+\end{table}
+
+Next we valued a second equally across the six archives and pooled the budgets. Allocating $\lfloor n_g/10\rfloor$ queries per group uses 394 checks in total. Corollary~\ref{co:groups} reduces the guaranteed width by 43.8\% relative to this allocation in the primary replay. In a post hoc comparison we allocated checks in proportion to the summed reference times, rounding by largest remainder. We also tried the marginal greedy rule, breaking ties by table order. Allocating by reference-time share recovered most of the gain. The optimum improved on that baseline by 2.0\% in the primary replay. Greedy attained the same \emph{integer} objective and allocation as the exact algorithm at all three slice lengths (Table~\ref{tab:allocation}). These observations give the size of the gains against specific baselines. The exact algorithm supplies a certificate for a new panel regardless of its spacings or one-step gains.
+
+Conditioning on reference success also matters. As a separate sensitivity, we included all 4,695 evaluation instances and charged an unsuccessful backup the full scenario cutoff. At the 1\% slice the CSP schedule solved 1,394 instances against 1,382 for the reference, and its fixed-slot ratio changed from 1.073 to 0.972. On SAT it solved 163 against 162, with a ratio of 0.997. A capped budget comparison with differing coverage answers a different operational question from elapsed time on a common solved panel.
+
+\section{Scope and reproducibility}
+The guarantee applies to an indexed, finite archive, an exact count and checks that recover the original flags. A new benchmark can avoid the ambiguity by releasing the sum of backup times on routed instances. A stable join also settles the total directly. In a learned front end the quality of accepted outputs needs independent verification. Cached state, parallel execution and noisy flag recovery require different models. The six replayed archives illustrate the effect of masking. They provide no prevalence estimate for missing records or timing errors in published benchmarks.
+
+The accompanying replication package supplies the pinned ASlib revision and input hashes, replay scripts, an independent reconstruction of all 18 scenario--slice settings, exhaustive small-instance checks and the allocation comparison. It also provides the full coverage counts and intervals for all study budgets. Raw solver logs are available from \url{https://github.com/coseal/aslib_data}.
+
+\paragraph{Funding and competing interests.}
+The authors received no specific funding for this work and declare no competing interests.
+
+\paragraph{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process.}
+OpenAI Codex assisted with developing the research question and proofs, preparing analysis and verification code, reviewing related literature, drafting the manuscript and preparing submission materials. Numerical results were computed from the archived solver records using the scripts supplied with this article.
+
+\begin{thebibliography}{9}
+\bibitem{olston} C. Olston, J. Widom, Offering a precision-performance tradeoff for aggregation queries over replicated data, in: Proceedings of the 26th International Conference on Very Large Data Bases, 2000, pp. 144--155.
+\bibitem{cambanis} S. Cambanis, G. Simons, W. Stout, Inequalities for $Ek(X,Y)$ when the marginals are fixed, Z. Wahrscheinlichkeitstheorie verw. Gebiete 36 (1976) 285--294. \href{https://doi.org/10.1007/BF00532695}{doi:10.1007/BF00532695}.
+\bibitem{chen} X. Chen, M. Goerigk, M. Poss, The robust selection problem with information discovery, Discrete Applied Mathematics 382 (2026) 277--292. \href{https://doi.org/10.1016/j.dam.2025.12.012}{doi:10.1016/j.dam.2025.12.012}.
+\bibitem{zhuo} Z. Zhuo, V. Nagarajan, A simple approximation algorithm for optimal decision tree, Operations Research Letters 64 (2026) 107370. \href{https://doi.org/10.1016/j.orl.2025.107370}{doi:10.1016/j.orl.2025.107370}.
+\bibitem{aslib} B. Bischl et al., ASlib: A benchmark library for algorithm selection, Artificial Intelligence 237 (2016) 41--58. \href{https://doi.org/10.1016/j.artint.2016.04.003}{doi:10.1016/j.artint.2016.04.003}.
+\end{thebibliography}
+\end{document}

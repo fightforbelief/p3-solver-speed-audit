@@ -2,11 +2,11 @@
 
 **Yunjie Guo and Hanqing Yang.** If a presolver needs a backup on a known number of instances, the overall runtime depends on which ones they are. This paper derives the smallest worst-case interval an auditor can guarantee by recovering a limited number of flags. It gives the optimal batch, an adversarial bound for sequential designs, a shared-budget allocation, and a complexity boundary for unequal prices.
 
-[Read the paper](paper/manuscript.pdf) · [Study design](PROTOCOL.md) · [Results and hashes](results/manifest.json)
+[ORL submission manuscript](submission/orl/manuscript.pdf) · [Journal decision and upload files](submission/orl/README.md) · [Original study report](paper/manuscript.pdf) · [Study design](PROTOCOL.md) · [Results and hashes](results/manifest.json)
 
 ## Findings
 
-The six primary ASlib panels contain 3,968 reference-solved instances. Treating failures as uniformly paired with reference times predicted a speed advantage in all six. Full pairing gave one advantage, four slowdowns of 6.6%–12.2%, and one slowdown within 0.05% of parity. Including reference timeouts under an explicit fixed-slot policy changed the direction for CSP and SAT. With 394 equally priced checks, optimal allocation across the six panels reduced worst-case width by 43.8% relative to assigning 10% to each panel. Within each primary panel the slowest-only design attained the optimal bound at the 10% budget.
+The six primary ASlib panels contain 3,968 reference-solved instances. Treating failures as uniformly paired with reference times predicted a speed advantage in all six. Full pairing gave one advantage, four slowdowns of 6.6%–12.2%, and one slowdown within 0.05% of parity. Including reference timeouts under an explicit fixed-slot policy changed the direction for CSP and SAT. With 394 equally priced checks, optimal allocation across the six panels reduced worst-case width by 43.8% relative to assigning 10% to each panel. With allocation proportional to reference time, the corresponding gain was 2.0%. Marginal greedy matched the exact optimum at all three slices. [Allocation comparisons](results/allocation_comparison.json). Within each primary panel the slowest-only design attained the optimal bound at the 10% budget.
 
 This is an audit of finite recorded schedules. The experiments replay published solver records, with explicit time-slice and cold-restart assumptions. Industry-wide prevalence, fresh wall-clock speedups and learned-proxy accuracy require different evidence.
 

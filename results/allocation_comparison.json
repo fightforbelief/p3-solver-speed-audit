@@ -1,0 +1,174 @@
+{
+  "scenarios": [
+    "ASP-POTASSCO",
+    "BNSL-2016",
+    "CSP-2010",
+    "MIP-2016",
+    "QBF-2016",
+    "SAT11-INDU"
+  ],
+  "comparisons": [
+    {
+      "slice_pct": 1,
+      "total_reference_ns": 596618900389750,
+      "designs": {
+        "instance_share": {
+          "queries": [
+            91,
+            82,
+            138,
+            16,
+            51,
+            16
+          ],
+          "width_ns": 128845133964250,
+          "normalized_width": 0.21595885393520056
+        },
+        "reference_time_share": {
+          "queries": [
+            24,
+            180,
+            94,
+            29,
+            10,
+            57
+          ],
+          "width_ns": 73913395017250,
+          "normalized_width": 0.1238871161623693
+        },
+        "marginal_greedy": {
+          "queries": [
+            38,
+            168,
+            88,
+            31,
+            13,
+            56
+          ],
+          "width_ns": 72403430024250,
+          "normalized_width": 0.12135624596698395
+        },
+        "exact": {
+          "queries": [
+            38,
+            168,
+            88,
+            31,
+            13,
+            56
+          ],
+          "width_ns": 72403430024250,
+          "normalized_width": 0.12135624596698395
+        }
+      }
+    },
+    {
+      "slice_pct": 5,
+      "total_reference_ns": 596618900389750,
+      "designs": {
+        "instance_share": {
+          "queries": [
+            91,
+            82,
+            138,
+            16,
+            51,
+            16
+          ],
+          "width_ns": 115810074362250,
+          "normalized_width": 0.19411063626478373
+        },
+        "reference_time_share": {
+          "queries": [
+            24,
+            180,
+            94,
+            29,
+            10,
+            57
+          ],
+          "width_ns": 65830066096250,
+          "normalized_width": 0.1103385528907072
+        },
+        "marginal_greedy": {
+          "queries": [
+            40,
+            164,
+            91,
+            29,
+            13,
+            57
+          ],
+          "width_ns": 64185765528250,
+          "normalized_width": 0.1075825212481866
+        },
+        "exact": {
+          "queries": [
+            40,
+            164,
+            91,
+            29,
+            13,
+            57
+          ],
+          "width_ns": 64185765528250,
+          "normalized_width": 0.1075825212481866
+        }
+      }
+    },
+    {
+      "slice_pct": 10,
+      "total_reference_ns": 596618900389750,
+      "designs": {
+        "instance_share": {
+          "queries": [
+            91,
+            82,
+            138,
+            16,
+            51,
+            16
+          ],
+          "width_ns": 103256284253250,
+          "normalized_width": 0.17306908008746677
+        },
+        "reference_time_share": {
+          "queries": [
+            24,
+            180,
+            94,
+            29,
+            10,
+            57
+          ],
+          "width_ns": 58875167352250,
+          "normalized_width": 0.09868136479382222
+        },
+        "marginal_greedy": {
+          "queries": [
+            44,
+            159,
+            94,
+            26,
+            13,
+            58
+          ],
+          "width_ns": 56859278852250,
+          "normalized_width": 0.09530251022068836
+        },
+        "exact": {
+          "queries": [
+            44,
+            159,
+            94,
+            26,
+            13,
+            58
+          ],
+          "width_ns": 56859278852250,
+          "normalized_width": 0.09530251022068836
+        }
+      }
+    }
+  ]
+}
